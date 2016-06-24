@@ -11,10 +11,12 @@
               <ListView.itemTemplate>
                   <GridLayout colums="auto, *">
                         <GridLayout columns="auto" rows="auto" cssClass="favourite-wrap">
-                                <Image id="imgFav" stretch="none" cssClass="icon-image" src="res://ic_add_to_fav_1" />
+                                <Image id="imgFav" stretch="none" cssClass="icon-image" src="res://ic_add_to_fav" />
                         </GridLayout>
 
-                        <StackLayout col="1">
+                        <StackLayout col="1" cssClass="fix-layout">
+                                <Label text="{{ title }}" textWrap="true" />
+                                <Label text="{{ room }}" cssClass="info-orange" />
                         </StackLayout>
                   </GridLayout>
               </ListView.itemTemplate>
