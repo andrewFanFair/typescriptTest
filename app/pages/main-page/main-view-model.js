@@ -1,81 +1,48 @@
 "use strict";
 var observable_1 = require('data/observable');
 var session_page_view_model_1 = require('../session-page/session-page-view-model');
+var session_service_1 = require('../../services/session-service');
 var MainViewModel = (function (_super) {
     __extends(MainViewModel, _super);
     function MainViewModel() {
         _super.call(this);
-        this._tempSessions = new Array();
         this._allSessions = new Array();
+        this._sessionService = new session_service_1.SessionService();
+        this.set('isLoading', true);
     }
     Object.defineProperty(MainViewModel.prototype, "sessions", {
         get: function () {
-            return this._allSessions;
+            return this._sessions;
         },
         enumerable: true,
         configurable: true
     });
     MainViewModel.prototype.init = function () {
         var _this = this;
-        var sessionArray = [
-            {
-                id: '1',
-                title: 'session 1',
-                start: new Date().toDateString(),
-                end: new Date().toDateString(),
-                room: 'room1',
-                roomInfo: {
-                    roomId: 'room1',
-                    name: 'myroom1',
-                    url: '',
-                    theme: '',
-                },
-                speakers: [],
-                description: 'session 1 description',
-                descriptionShort: 'session 1 short description',
-                calendarEventId: '',
-                isBreak: false,
-            },
-            {
-                id: '2',
-                title: 'session 2',
-                start: new Date().toDateString(),
-                end: new Date().toDateString(),
-                room: 'room1',
-                roomInfo: {
-                    roomId: 'room1',
-                    name: 'myroom1',
-                    url: '',
-                    theme: '',
-                },
-                speakers: [],
-                description: 'session 1 description',
-                descriptionShort: 'session 1 short description',
-                calendarEventId: '',
-                isBreak: false,
-            },
-            {
-                id: '3',
-                title: 'session 3',
-                start: new Date().toDateString(),
-                end: new Date().toDateString(),
-                room: 'room1',
-                roomInfo: {
-                    roomId: 'room1',
-                    name: 'myroom1',
-                    url: '',
-                    theme: '',
-                },
-                speakers: [],
-                description: 'session 1 description',
-                descriptionShort: 'session 1 short description',
-                calendarEventId: '',
-                isBreak: false,
-            }
-        ];
-        sessionArray.forEach(function (session) {
-            // this._tempSessions.push(session);
-            _this._allSessions.push(new session_page_view_model_1.SessionViewModel(session));
+        this._sessionService.loadSessions()
+            .then(function (result) {
+            _this.pushSessions(result);
+            _this.onDataLoaded();
+        });
+    };
+    MainViewModel.prototype.pushSessions = function (sessionsFromService) {
+        var _this = this;
+        sessionsFromService.forEach(function (session) {
+            var newSession = new session_page_view_model_1.SessionViewModel(session);
+            _this._allSessions.push(newSession);
+        });
+    };
+    MainViewModel.prototype.onDataLoaded = function () {
+        this.set('isLoading', false);
+        this.filter();
+    };
+    MainViewModel.prototype.filter = function () {
+        this._sessions = this._allSessions;
+        this.notify({
+            object: this,
+            eventName: observable_1.Observable.propertyChangeEvent,
+            propertName: 'sessions',
+            value: this._sessions,
         });
     };
     return MainViewModel;
