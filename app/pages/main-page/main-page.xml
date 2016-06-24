@@ -10,8 +10,9 @@
           <ListView items="{{ sessions }}" row="1">
               <ListView.itemTemplate>
                   <GridLayout colums="auto, *">
-                        <GridLayout columns="auto" rows="auto" cssClass="favourite-wrap">
-                                <Image id="imgFav" stretch="none" cssClass="icon-image" src="res://ic_add_to_fav" />
+                        <GridLayout columns="auto" rows="auto" cssClass="favorite-wrap"
+                                    tap="toggleFavorite">
+                                <Image id="imgFav" stretch="none" cssClass="icon-image" src="{{ favorite ? 'res://ic_add_to_fav_1' : 'res://ic_add_to_fav' }}" />
                         </GridLayout>
 
                         <StackLayout col="1" cssClass="fix-layout">

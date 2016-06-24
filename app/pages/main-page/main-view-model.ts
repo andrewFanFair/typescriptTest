@@ -1,20 +1,22 @@
 import { Observable } from 'data/observable';
-import { Session } from '../../shared/interfaces'
+import { ISession } from '../../shared/interfaces'
+import { SessionViewModel } from '../session-page/session-page-view-model';
 
 export class MainViewModel extends Observable {
 
-    private _tempSessions: Array<Session> = new Array<Session>();
+    private _tempSessions: Array<ISession> = new Array<ISession>();
+    private _allSessions: Array<SessionViewModel> = new Array<SessionViewModel>();
 
     constructor() {
         super();
     }
 
-    get sessions(): Array<Session> {
-        return this._tempSessions;
+    get sessions(): Array<SessionViewModel> {
+        return this._allSessions;
     }
 
     public init() {
-        var sessionArray: Array<Session> = [
+        var sessionArray: Array<ISession> = [
             {
                 id: '1',
                 title: 'session 1',
@@ -72,7 +74,8 @@ export class MainViewModel extends Observable {
         ];
 
         sessionArray.forEach((session) => {
-            this._tempSessions.push(session);
+            // this._tempSessions.push(session);
+            this._allSessions.push(new SessionViewModel(session));
         });
     }   
 }

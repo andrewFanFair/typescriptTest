@@ -20,7 +20,7 @@ export interface IRoomInfo {
     theme: string;
 }
 
-export interface Session {
+export interface ISession {
     id: string;
     title: string;
     start: string;
@@ -34,7 +34,7 @@ export interface Session {
     isBreak: boolean;
 }
 
-export interface FavouriteSession {
+export interface IFavoriteSession {
     sessionId: string;
     calendarEventId: string;
 }

@@ -1,14 +1,16 @@
 "use strict";
 var observable_1 = require('data/observable');
+var session_page_view_model_1 = require('../session-page/session-page-view-model');
 var MainViewModel = (function (_super) {
     __extends(MainViewModel, _super);
     function MainViewModel() {
         _super.call(this);
         this._tempSessions = new Array();
+        this._allSessions = new Array();
     }
     Object.defineProperty(MainViewModel.prototype, "sessions", {
         get: function () {
-            return this._tempSessions;
+            return this._allSessions;
         },
         enumerable: true,
         configurable: true
@@ -72,7 +74,8 @@ var MainViewModel = (function (_super) {
             }
         ];
         sessionArray.forEach(function (session) {
-            _this._tempSessions.push(session);
+            // this._tempSessions.push(session);
+            _this._allSessions.push(new session_page_view_model_1.SessionViewModel(session));
         });
     };
     return MainViewModel;

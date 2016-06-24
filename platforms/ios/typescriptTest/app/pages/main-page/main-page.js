@@ -8,4 +8,9 @@ function pageLoaded(args) {
     vm.init();
 }
 exports.pageLoaded = pageLoaded;
+function toggleFavorite(args) {
+    var session = args.view.bindingContext;
+    session.toggleFavorite();
+}
+exports.toggleFavorite = toggleFavorite;
 //# sourceMappingURL=main-page.js.map
