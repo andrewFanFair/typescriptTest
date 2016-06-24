@@ -1,0 +1,13 @@
+﻿.page-header {
+    background-image: url('res://background');
+    background-size: cover; 
+}
+
+.page-title {
+    font-size: 14;
+    color: #fac950;
+}
+
+.bold {
+    font-weight: bold;
+}

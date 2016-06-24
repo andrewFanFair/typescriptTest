@@ -1,11 +1,12 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
     <GridLayout rows="auto, *">
       <!--<header>-->
-      <StackLayout>
+      <StackLayout cssClass="page-header">
+          <Label text="Header" cssClass="page-title bold" horizontalAlignment="center" margin="15"/>
       </StackLayout>
 
       <!--Session Views-->
-      <GridLayout rows="auto, *", row="1">
+      <GridLayout rows="auto, *" row="1">
           <ListView items="{{ sessions }}">
               <ListView.itemTemplate>
                   <Label text="{{ title }}" />
